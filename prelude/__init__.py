@@ -1,18 +1,18 @@
-__version__ = '0.1.0'
+__version__ = "0.1.0"
 
 # A bunch of nice functions I want in basically every Python project.
-import sys
 import enum
+import sys
 from typing import (
-    TypeVar,
-    Type,
-    List,
-    Set,
-    Sequence,
     Iterable,
     Iterator,
-    Tuple,
+    List,
     NoReturn,
+    Sequence,
+    Set,
+    Tuple,
+    Type,
+    TypeVar,
     Union,
 )
 
