@@ -30,9 +30,8 @@ class SumType(enum.Enum):
     @classmethod
     def new(cls: Type[S], s: Union[str, int]) -> S:
         if isinstance(s, str):
-            s = s.replace(
-                "-", "_"
-            )  # I like using dashes in identifiers/string literals
+            # I like using dashes in identifiers/string literals
+            s = s.replace("-", "_")
             names = [c.name for c in cls]
             assert s in names, f"{cls.__name__} '{s}' must be one of {', '.join(names)}"
             return cls[s]
@@ -48,6 +47,9 @@ class SumType(enum.Enum):
     # I like to use names as values for these; I don't really care about the actual value
     def __str__(self) -> str:
         return self.name.replace("_", "-")
+
+    def __repr__(self) -> str:
+        return str(self)
 
     @property
     def formatted(self) -> str:
@@ -112,7 +114,7 @@ def never(value: NoReturn) -> NoReturn:
     assert False, f"Unhandled value: {value} ({type(value).__name__})"
 
 
-def eprint(*args, **kwargs):
+def eprint(*args, **kwargs):  # type: ignore
     """
     Print to stderr.
     """
