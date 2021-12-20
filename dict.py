@@ -61,7 +61,7 @@ def set(dct: StrDict, key: Key, value: Any, sep: str = ".") -> None:
 
 
 def merge(*dcts: StrDict) -> StrDict:
-    result = {}
+    result: StrDict = {}
     for dct in dcts:
         for key, value in flattened(dct).items():
             set(result, key, value)
