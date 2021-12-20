@@ -1,5 +1,7 @@
 __version__ = "0.1.0"
 
+from . import dict
+
 # A bunch of nice functions I want in basically every Python project.
 import enum
 import sys
