@@ -6,15 +6,24 @@ Key = Union[str, Reversible[str]]
 Primitive = Union[str, int, float, bool, None]
 
 
+def _index(dct: StrDict, key: str) -> StrDict:
+    new_dct = dct[key]
+
+    if not isinstance(new_dct, dict):
+        raise ValueError(f"Cannot index dct with key '{key}'")
+
+    return new_dct
+
+
 def get(dct: StrDict, key: Key, sep: str = ".") -> Any:
     if isinstance(key, str):
         key = key.split(sep)
 
     key = list(reversed(key))
-    while key:
-        dct = dct[key.pop()]
+    while len(key) > 1:
+        dct = _index(dct, key.pop())
 
-    return dct
+    return dct[key[0]]
 
 
 def contains(dct: StrDict, key: Key, sep: str = ".") -> bool:
@@ -26,7 +35,7 @@ def contains(dct: StrDict, key: Key, sep: str = ".") -> bool:
         popped = key.pop()
         if popped not in dct:
             return False
-        dct = dct[popped]
+        dct = _index(dct, popped)
 
     return key[0] in dct
 
@@ -38,7 +47,7 @@ def delete(dct: StrDict, key: Key, sep: str = ".") -> None:
     key = list(reversed(key))
 
     while len(key) > 1:
-        dct = dct[key.pop()]
+        dct = _index(dct, key.pop())
 
     del dct[key[0]]
 
@@ -55,7 +64,7 @@ def set(dct: StrDict, key: Key, value: Any, sep: str = ".") -> None:
         if k not in dct:
             dct[k] = {}
 
-        dct = dct[k]
+        dct = _index(dct, k)
 
     dct[key[0]] = value
 
