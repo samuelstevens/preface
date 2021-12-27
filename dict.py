@@ -1,6 +1,5 @@
 from typing import Any, Dict, Reversible, Union
 
-
 StrDict = Dict[str, object]
 Key = Union[str, Reversible[str]]
 Primitive = Union[str, int, float, bool, None]
