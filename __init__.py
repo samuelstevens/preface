@@ -46,6 +46,8 @@ class SumType(enum.Enum):
             values = [c.value for c in cls]
             raise ValueError(f"{cls.__name__} '{s}' must be one of {', '.join(values)}")
 
+        raise ValueError(f"Can't use '{s}' as a literal!")
+
     # I like to use names as values for these; I don't really care about the actual value
     def __str__(self) -> str:
         return self.name.replace("_", "-")
@@ -105,7 +107,7 @@ def grouped(things: Sequence[T], size: int = 1) -> Iterator[Tuple[T, ...]]:
     return zip(*rows)
 
 
-def unwrap(maybe: Union[T, Exception]) -> T:
+def unwrap(maybe: Result[T]) -> T:
     if isinstance(maybe, Exception):
         raise maybe
 
