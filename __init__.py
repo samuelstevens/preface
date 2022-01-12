@@ -115,7 +115,7 @@ def unwrap(maybe: Result[T]) -> T:
 
 
 def never(value: NoReturn) -> NoReturn:
-    assert False, f"Unhandled value: {value} ({type(value).__name__})"
+    raise AssertionError(f"Unhandled value: {value} ({type(value).__name__})")
 
 
 def eprint(*args, **kwargs):  # type: ignore
