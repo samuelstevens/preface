@@ -61,6 +61,10 @@ class SumType(enum.Enum):
         words = [word.capitalize() for word in words]
         return " ".join(words)
 
+    @staticmethod
+    def auto() -> enum.auto:
+        return enum.auto()
+
 
 # endregion
 
