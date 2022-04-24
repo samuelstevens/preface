@@ -1,10 +1,12 @@
 dist/
-__pycache__/
 venv/
-.hypothesis/
-.tox/
-.coverage
 
+__pycache__/
+
+.coverage
 .mypy_cache/
 .pytest_cache/
+.hypothesis/
+.tox/
+
 .python-version
