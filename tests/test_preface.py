@@ -1,7 +1,7 @@
 import hypothesis
 from hypothesis import strategies
 
-from prelude import argsort, flattened, get, grouped, indexed
+from preface import argsort, flattened, get, grouped, indexed
 
 
 @hypothesis.given(strategies.sets(strategies.integers(), min_size=1))

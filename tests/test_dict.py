@@ -1,4 +1,4 @@
-from prelude import dict
+from preface import dict
 
 
 def test_set_dict_without_nested_dict() -> None:
