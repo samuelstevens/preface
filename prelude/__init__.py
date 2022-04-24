@@ -1,6 +1,7 @@
+"""Some helper functions and classes that I want in nearly every project."""
+
 __version__ = "0.1.0"
 
-# A bunch of nice functions I want in basically every Python project.
 import enum
 import sys
 from typing import (
