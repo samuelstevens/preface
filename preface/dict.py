@@ -88,3 +88,22 @@ def flattened(dct: Dict[str, Any]) -> Dict[str, Primitive]:
         new[key] = value
 
     return new
+
+
+def pop(dct: Dict[str, Any], key: Key, sep: str = ".") -> Any:
+    """
+    Pops a field out of a dict.
+    """
+    if isinstance(key, str):
+        key = key.split(sep)
+
+    key = list(reversed(key))
+
+    while len(key) > 1:
+        dct = _index(dct, key.pop())
+
+    value = dct[key[0]]
+
+    del dct[key[0]]
+
+    return value

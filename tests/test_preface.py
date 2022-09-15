@@ -28,7 +28,7 @@ def test_flattened(seq):
     strategies.integers(min_value=1, max_value=5),
 )
 def test_grouped(seq, size):
-    for window in grouped(seq, size):
+    for window in grouped(seq, size=size):
         assert len(window) == size
 
 
