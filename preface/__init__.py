@@ -1,6 +1,6 @@
 """Some helper functions and classes that I want in nearly every project."""
 
-__version__ = "0.1.2"
+__version__ = "0.1.4"
 
 import enum
 import sys
@@ -148,9 +148,6 @@ def grouped(things: Sequence[T], *, size: int = 1) -> Iterator[Tuple[T, ...]]:
 
 
 def unwrap(maybe: Result[T]) -> T:
-    """
-
-    """
     if isinstance(maybe, Exception):
         raise maybe
 
