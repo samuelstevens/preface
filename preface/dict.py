@@ -5,13 +5,13 @@ Key = Union[str, Reversible[str]]
 Primitive = Union[str, int, float, bool, None]
 
 
-def _index(dct: StrDict, key: str) -> StrDict:
-    new_dct = dct[key]
+def typesafeindex(dct: StrDict, key: str) -> StrDict:
+    obj = dct[key]
 
-    if not isinstance(new_dct, dict):
-        raise ValueError(f"Cannot index dct with key '{key}'")
+    if not isinstance(obj, dict):
+        raise KeyError(f"Dict does not contain a subdict at '{key}'.")
 
-    return new_dct
+    return obj
 
 
 def get(dct: StrDict, key: Key, sep: str = ".") -> Any:
@@ -20,9 +20,10 @@ def get(dct: StrDict, key: Key, sep: str = ".") -> Any:
 
     key = list(reversed(key))
     while len(key) > 1:
-        dct = _index(dct, key.pop())
+        popped = key.pop()
+        dct = typesafeindex(dct, popped)
 
-    return dct[key[0]]
+    return dct[key.pop()]
 
 
 def contains(dct: StrDict, key: Key, sep: str = ".") -> bool:
@@ -34,7 +35,11 @@ def contains(dct: StrDict, key: Key, sep: str = ".") -> bool:
         popped = key.pop()
         if popped not in dct:
             return False
-        dct = _index(dct, popped)
+
+        try:
+            dct = typesafeindex(dct, popped)
+        except KeyError:
+            return False
 
     return key[0] in dct
 
@@ -46,7 +51,8 @@ def delete(dct: StrDict, key: Key, sep: str = ".") -> None:
     key = list(reversed(key))
 
     while len(key) > 1:
-        dct = _index(dct, key.pop())
+        popped = key.pop()
+        dct = typesafeindex(dct, popped)
 
     del dct[key[0]]
 
@@ -63,7 +69,7 @@ def set(dct: StrDict, key: Key, value: Any, sep: str = ".") -> None:
         if k not in dct:
             dct[k] = {}
 
-        dct = _index(dct, k)
+        dct = typesafeindex(dct, k)
 
     dct[key[0]] = value
 
@@ -100,7 +106,7 @@ def pop(dct: Dict[str, Any], key: Key, sep: str = ".") -> Any:
     key = list(reversed(key))
 
     while len(key) > 1:
-        dct = _index(dct, key.pop())
+        dct = typesafeindex(dct, key.pop())
 
     value = dct[key[0]]
 

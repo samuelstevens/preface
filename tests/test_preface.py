@@ -3,6 +3,8 @@ from hypothesis import strategies
 
 from preface import argsort, flattened, get, grouped, indexed
 
+integers = strategies.integers()
+
 
 @hypothesis.given(strategies.sets(strategies.integers(), min_size=1))
 def test_get(s):
@@ -33,7 +35,7 @@ def test_grouped(seq, size):
 
 
 @hypothesis.strategies.composite
-def list_and_indices(draw, elements=strategies.integers()):
+def list_and_indices(draw, elements=integers):
     lst = draw(strategies.lists(elements, min_size=1))
     indices = draw(
         strategies.lists(

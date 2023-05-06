@@ -1,6 +1,21 @@
 import preface
 
 
+def test_get_field_without_nested() -> None:
+    key = "a"
+    value = 1
+    dct = {key: value}
+
+    assert preface.dict.get(dct, key) == value
+
+
+def test_get_field_nested() -> None:
+    value = 1
+    dct = {"a": {"b": value}}
+
+    assert preface.dict.get(dct, "a.b") == value
+
+
 def test_set_dict_without_nested_dict() -> None:
     dct = {}
 
